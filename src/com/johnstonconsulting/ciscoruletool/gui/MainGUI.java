@@ -51,7 +51,8 @@ public class MainGUI extends javax.swing.JFrame {
         btnSave = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         lblRuleCount = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAddRule = new javax.swing.JButton();
+        btnClearAll = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cisco Rule Creator");
@@ -86,10 +87,17 @@ public class MainGUI extends javax.swing.JFrame {
 
         lblRuleCount.setText("Currently 0 Rules");
 
-        jButton1.setText("Add Rule...");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddRule.setText("Add Rule...");
+        btnAddRule.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddRuleActionPerformed(evt);
+            }
+        });
+
+        btnClearAll.setText("Clear All");
+        btnClearAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearAllActionPerformed(evt);
             }
         });
 
@@ -109,12 +117,14 @@ public class MainGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblRuleCount)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                                .addComponent(jButton1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                                .addComponent(btnAddRule))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(btnSave)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnClearAll)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(btnExit)
                                     .addGap(6, 6, 6))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -141,15 +151,17 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(lblRuleCount)
-                    .addComponent(jButton1))
+                    .addComponent(btnAddRule))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
-                    .addComponent(btnExit)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnExit)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSave)
+                        .addComponent(btnClearAll))))
         );
 
         pack();
@@ -172,7 +184,8 @@ public class MainGUI extends javax.swing.JFrame {
             JOptionPane.showConfirmDialog(this, ex.getMessage(), "Exception", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        JOptionPane.showConfirmDialog(this, "Rule created! ", "Rule saved", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Rule created! ", "Rule saved", JOptionPane.INFORMATION_MESSAGE);
+        clearAll();
         
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -180,11 +193,22 @@ public class MainGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAddRuleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRuleActionPerformed
         AddRule rule = new AddRule(this);
         rule.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAddRuleActionPerformed
 
+    private void btnClearAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearAllActionPerformed
+        clearAll();
+    }//GEN-LAST:event_btnClearAllActionPerformed
+
+    private void clearAll() {
+        txtName.setText("");
+        txtDescription.setText("");
+        lblRuleCount.setText("Current 0 Rules");
+        rules.clear();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -226,10 +250,11 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddRule;
+    private javax.swing.JButton btnClearAll;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox comboSeverity;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
